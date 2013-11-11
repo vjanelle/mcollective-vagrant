@@ -1,0 +1,7 @@
+forge "http://forge.puppetlabs.com"
+
+mod "puppetlabs/mcollective"
+mod "richardc/datacat"
+mod "puppetlabs/stdlib"
+mod "puppetlabs/java_ks"
+mod "puppetlabs/activemq"
