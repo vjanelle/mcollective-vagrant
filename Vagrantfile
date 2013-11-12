@@ -17,22 +17,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "puppetmaster" do |puppetmaster|
-    config.vm.network "private_network", ip: puppetMasterIP
+    puppetmaster.vm.network "private_network", ip: puppetMasterIP
 
     puppetmaster.vm.hostname = "puppetmaster"
-    config.vm.provision "shell", inline: "yum -y install puppet-server"
-    config.vm.provision "shell", inline: "cp /vagrant/puppetmaster/puppet.conf /etc/puppet"
-    config.vm.provision "shell", inline: "puppet resource service iptables ensure=stopped enable=false"
-    config.vm.provision "shell", inline: "service puppetmaster start"
+    puppetmaster.vm.provision "shell", inline: "yum -y install puppet-server"
+    puppetmaster.vm.provision "shell", inline: "cp /vagrant/puppetmaster/puppet.conf /etc/puppet"
+    puppetmaster.vm.provision "shell", inline: "puppet resource service iptables ensure=stopped enable=false"
+    puppetmaster.vm.provision "shell", inline: "service puppetmaster start"
   end
 
   AGENTS.times do |i|
     config.vm.define "mcollective#{i}" do |mc1|
       mc1.vm.hostname = "mcollective#{i}"
-      config.vm.network "private_network", ip: "192.168.50.#{11+i}"
-      config.vm.provision "shell", inline: "mkdir -p /vagrant/mcollective#{i}-ssl"
-      config.vm.provision "shell", inline: "puppet resource host "
-      config.vm.provision "shell", inline: "puppet agent -t --server=#{puppetMasterHostname}.localdomain; echo ''"
+      mc1.vm.network "private_network", ip: "192.168.50.#{11+i}"
+      mc1.vm.provision "shell", inline: "mkdir -p /vagrant/mcollective#{i}-ssl"
+      mc1.vm.provision "shell", inline: "puppet resource host "
+      mc1.vm.provision "shell", inline: "puppet agent -t --server=#{puppetMasterHostname}.localdomain; echo ''"
     end
   end
 
