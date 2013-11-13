@@ -1,7 +1,17 @@
 forge "http://forge.puppetlabs.com"
 
-mod "puppetlabs/mcollective"
-mod "richardc/datacat"
 mod "puppetlabs/stdlib"
+
+mod "mcollective",
+    :git => "https://github.com/puppetlabs/puppetlabs-mcollective.git",
+    :ref => "master"
+mod "richardc/datacat"
 mod "puppetlabs/java_ks"
 mod "puppetlabs/activemq"
+
+mod "razorsedge/vmwaretools"
+
+mod "puppetlabs/puppetdb"
+mod "puppetlabs/postgresql"
+mod "puppetlabs/inifile"
+mod "puppetlabs/concat"

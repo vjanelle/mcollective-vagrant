@@ -21,12 +21,17 @@ mcollective::plugin { 'sysctl':
 
 }
 
+if $::virtual == 'vmware' {
+  include vmwaretools
+}
+
 node 'puppetmaster.localdomain' {
   class { '::mcollective':
     middleware       => true,
     middleware_hosts => [ $broker ],
     client           => true,
   }
+  include puppetdb
 }
 
 node default {

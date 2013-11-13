@@ -12,8 +12,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "centos_6_4_x86_64"
   config.vm.provision "shell", inline: "yum -y localinstall http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm"
   config.vm.provision "shell", inline: "puppet resource host #{puppetMasterHostname}.localdomain ip=#{puppetMasterIP} host_aliases=puppet"
+  config.vm.provision "shell", inline: "puppet resource service iptables ensure=stopped enable=false"
   AGENTS.times do |a|
     config.vm.provision "shell", inline: "puppet resource host mcollective#{a}.localdomain ip=192.168.50.#{11+a}"
+  end
+
+  config.vm.define "nagios" do |ng|
+    ng.vm.hostname = "nagios"
+    ng.vm.network "private_network", ip: '192.158.50.9'
+    ng.vm.provision "shell", inline: "puppet agent -t --server=#{puppetMasterHostname}.localdomain; echo ''"
   end
 
   config.vm.define "puppetmaster" do |puppetmaster|
@@ -22,7 +29,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppetmaster.vm.hostname = "puppetmaster"
     puppetmaster.vm.provision "shell", inline: "yum -y install puppet-server"
     puppetmaster.vm.provision "shell", inline: "cp /vagrant/puppetmaster/puppet.conf /etc/puppet"
-    puppetmaster.vm.provision "shell", inline: "puppet resource service iptables ensure=stopped enable=false"
     puppetmaster.vm.provision "shell", inline: "service puppetmaster start"
   end
 
