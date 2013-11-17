@@ -18,11 +18,6 @@ mcollective::plugin { 'sysctl':
   package    => true,
   type       => 'data',
   has_client => false,
-
-}
-
-if $::virtual == 'vmware' {
-  include vmwaretools
 }
 
 node 'puppetmaster.localdomain' {
