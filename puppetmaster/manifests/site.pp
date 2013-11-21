@@ -20,6 +20,10 @@ mcollective::plugin { 'sysctl':
   has_client => false,
 }
 
+package {'git':
+  ensure => installed,
+}
+
 node 'puppetmaster.localdomain' {
   class { '::mcollective':
     middleware       => true,

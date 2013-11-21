@@ -40,6 +40,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "rundeck" do |rd|
+    rd.vm.hostname = "rundeck"
+    rd.vm.network "private_network", ip: '192.158.50.8'
+    rd.vm.provision "puppet_server" do |puppet|
+      puppet.puppet_server = "#{puppetMasterHostname}.localdomain"
+      puppet.options = "-t"
+    end
+  end
+
   AGENTS.times do |i|
     config.vm.define "mcollective#{i}" do |mc1|
       mc1.vm.hostname = "mcollective#{i}"
