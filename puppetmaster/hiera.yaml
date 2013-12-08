@@ -1,0 +1,11 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /vagrant/puppetmaster/hieradata
+:hierarchy:
+  - "%{::group}"
+  - "%{group}"
+  - "%{::clientcert}"
+  - "%{::custom_location}"
+  - common

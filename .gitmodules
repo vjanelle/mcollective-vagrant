@@ -1,3 +1,6 @@
 [submodule "nagios-plugins"]
 	path = nagios-plugins
 	url = https://github.com/nagios-plugins/nagios-plugins.git
+[submodule "nagios-checks/check_yum"]
+	path = nagios-checks/check_yum
+	url = https://github.com/salderma/check_yum.git
