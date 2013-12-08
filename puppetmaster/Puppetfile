@@ -8,10 +8,26 @@ mod "mcollective",
 mod "richardc/datacat"
 mod "puppetlabs/java_ks"
 mod "puppetlabs/activemq"
+mod "stahnma/epel"
 
 mod "razorsedge/vmwaretools"
 
 mod "puppetlabs/puppetdb"
-mod "puppetlabs/postgresql"
+mod "puppetlabs/postgresql", "3.1.0"
 mod "puppetlabs/inifile"
 mod "puppetlabs/concat"
+
+# mcomaster
+
+mod "maestrodev/rvm"
+
+mod "dalen/puppetdbquery"
+
+mod "hunner/haproxy_plugin"
+
+mod "puppetlabs/haproxy"
+
+mod "puppetlabs/apache"
+
+mod "trlinkin/nsswitch"
+mod 'trlinkin/validate_multi'
