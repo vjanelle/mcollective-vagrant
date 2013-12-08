@@ -33,7 +33,12 @@ package {'git':
   ensure => installed,
 }
 
-node 'puppetmaster.localdomain' {
+puppet_config { 'agent/master':
+  ensure => present,
+  value  => 'puppetmaster.local',
+}
+
+node 'puppetmaster' {
   include puppetdb
   include puppetdb::master::config
 
@@ -60,16 +65,6 @@ node 'haproxy' {
 }
 
 node 'mcollective0' inherits default {
-  include apache
-  package { 'php':
-  }
-  package { 'php-pgsql':
-  }
-  package { 'php-ZendFramework-Db-Adapter-Pdo-Pgsql':
-  }
-  apache::mod { 'php5':
-  }
-  include php_composer_rpms
 }
 
 node 'db' inherits default {

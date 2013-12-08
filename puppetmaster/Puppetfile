@@ -1,5 +1,9 @@
 forge "http://forge.puppetlabs.com"
 
+mod "vjanelle-puppet_config",
+    :git => "https://github.com/vjanelle/vjanelle-puppet_config",
+    :ref => "master"
+
 mod "puppetlabs/stdlib"
 
 mod "mcollective",
