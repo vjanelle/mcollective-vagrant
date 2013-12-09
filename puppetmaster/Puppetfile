@@ -26,6 +26,7 @@ mod "puppetlabs/concat"
 mod "maestrodev/rvm"
 
 mod "dalen/puppetdbquery"
+mod "dalen/dnsquery"
 
 mod "hunner/haproxy_plugin"
 
